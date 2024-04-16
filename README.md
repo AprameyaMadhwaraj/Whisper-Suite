@@ -1,3 +1,3 @@
 # Whisper-Suite
-A complete solution for all application of the popular opensource speech-to-text model, Whisper, by OpenAI. <br>
-This repository contains multiple applications of Whisper, for real time speech transcription. 
+Welcome to Whisper-Suite, built over Whisper, a comprehensive open-source speech-to-text model developed by OpenAI. <br>
+This repository showcases various applications of Whisper for real-time speech transcription across a range of use cases.
