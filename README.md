@@ -17,8 +17,8 @@
 <h2>Why Choose Whisper-Suite?</h2>
 <ul>
   <li><strong>Cutting-Edge Technology</strong>: Whisper is at the forefront of speech-to-text innovation, ensuring the highest levels of accuracy and efficiency.</li>
-  <li><strong>Real-Time Transcription</strong>: Whether you're in a meeting, lecture, or interview, Whisper-Suite delivers real-time transcription when you need it most.</li>
-  <li><strong>Easy Integration</strong>: With our API and WhisperX approaches, integrating Whisper into your projects is simple and hassle-free.</li>
+  <li><strong>Real-Time Transcription</strong>: Whether you're in a meeting, lecture, interview, or even creating a report! Whisper-Suite delivers real-time transcription when you need it most.</li>
+  <li><strong>Easy Integration</strong>: With the API and WhisperX approaches, integrating Whisper into your projects is simple and hassle-free.</li>
 </ul>
 
 <h2>Get Started Today</h2>
