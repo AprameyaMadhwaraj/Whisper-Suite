@@ -18,7 +18,7 @@ CHANNELS = 1
 RATE = 16000
 RECORD_SECONDS = 10
 
-local_directory_name = "D:/Personal/Aikenist/Server_audio"
+local_directory_name = "ENTER/YOUR/PATH"
 model = whisperx.load_model('small', device='cuda', compute_type='float16', language='en')
 
 audio = pyaudio.PyAudio()
@@ -72,8 +72,9 @@ async def transcribe_and_send(websocket, tmp_audio_file_path):
         # For Speech
         if 'segments' in result and result['segments']:
             transcript = result['segments'][0]['text']
+            #print(trascript)
 
-            # Post processing Transcript        
+            # Post processing Transcript - **OPTIONAL        
             text_ = transcript.strip()
             text_before = text_
             text_after = re.sub(r'\b(\w+)\.(?=\s|$)', r'\1', text_before)
