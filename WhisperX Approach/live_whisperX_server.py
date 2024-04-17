@@ -5,7 +5,7 @@ import pyaudio
 import tempfile
 import base64
 import wave
-from text_correction import *  # noqa: F403
+from text_correction import *  # This is a local import, skip if not needed
 import re
 import os
 
@@ -51,8 +51,9 @@ async def process_audio(websocket, path):
                 # For Speech
                 if 'segments' in result and result['segments']:
                     transcript = result['segments'][0]['text']
-
-                    # Post processing Transcript        
+                    #print(transcript)
+                    
+                    # Post processing Transcript - **OPTIONAL
                     text_ = transcript.strip()
                     text_before = text_
                     text_after = re.sub(r'\b(\w+)\.(?=\s|$)', r'\1', text_before)
