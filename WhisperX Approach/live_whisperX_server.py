@@ -17,7 +17,7 @@ CHANNELS = 1
 RATE = 16000
 RECORD_SECONDS = 6
 
-#local_directory_name = "D:/Personal/Aikenist/Server_audio"
+#local_directory_name = "ENTER/YOUR/PATH"
 model = whisperx.load_model('small', device='cuda', compute_type='float16', language='en')
 
 audio = pyaudio.PyAudio()
