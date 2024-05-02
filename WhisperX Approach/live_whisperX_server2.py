@@ -5,7 +5,7 @@ import pyaudio
 import tempfile
 import base64
 import wave
-from text_correction import *  # noqa: F403
+from text_correction_v2 import *  # noqa: F403
 import re
 import os
 import datetime
@@ -18,12 +18,26 @@ CHANNELS = 1
 RATE = 16000
 RECORD_SECONDS = 10
 
-local_directory_name = "ENTER/YOUR/PATH"
+#local_directory_name = "ENTER/YOUR/PATH"
 model = whisperx.load_model('small', device='cuda', compute_type='float16', language='en')
+'''Bad Perfomance'''
+# model = whisperx.load_model('medium', device='cpu', compute_type='float32', language='en') # bad accuracy, disconnects from client
+# model = whisperx.load_model('distil-small', device='cpu', compute_type='float32', language='en') very low accuracy, slow
+# model = whisperx.load_model('distil-medium.en', device='cpu', compute_type='float32', language='en') low accuracy, slow
+# model = whisperx.load_model('distil-large-v2', device='cpu', compute_type='float32', language='en') # low accuracy, very slow, disconnects from client
+
+'''Good Performance'''
+# model = whisperx.load_model('distil-medium.en', device='cuda', compute_type='float16', language='en')
+# model = whisperx.load_model('large-v2', device='cuda', compute_type='int8', language='en')
+# model = whisperx.load_model('small', device='cpu', compute_type='int8', language='en') # missing segments, slow
+# model = whisperx.load_model('whisper-medium-int8-dynamic', device='cpu', compute_type='int8', language='en')
+
+
 
 audio = pyaudio.PyAudio()
 
 async def receive_and_write_audio(websocket):
+    tmp_audio_file_path = None  # Define the variable at the beginning of the function
     try:
         while True:
             # Receive base64 encoded audio data from the client
@@ -43,11 +57,6 @@ async def receive_and_write_audio(websocket):
                     wf.setframerate(RATE)
                     wf.writeframes(audio_data)
 
-                # For Saving Audio
-                current_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S") 
-                filename = os.path.join(local_directory_name,  f"{os.path.basename(tmp_audio_file_path)}_{current_time}.wav")
-                shutil.copy(tmp_audio_file_path, filename)
-
                 # Schedule the transcribing coroutine
                 asyncio.create_task(transcribe_and_send(websocket, tmp_audio_file_path))
 
@@ -55,13 +64,11 @@ async def receive_and_write_audio(websocket):
         print("\n \t CLIENT DISCONNECTED.")
     finally:
         # Clean up the temporary WAV file
-        try:
-            if tmp_audio_file_path is not None:
+        if tmp_audio_file_path and os.path.exists(tmp_audio_file_path):
+            try:
                 os.remove(tmp_audio_file_path)
-
-        except Exception as e:
-            print(f"Error cleaning up temporary WAV file: {e}")
-
+            except Exception as e:
+                print(f"Error cleaning up temporary WAV file: {e}")
 
 async def transcribe_and_send(websocket, tmp_audio_file_path):
     try:
