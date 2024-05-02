@@ -17,8 +17,8 @@ RECORD_SECONDS = 6
 local_directory_name = "D:/Personal/Aikenist/Client_audio"
 
 async def record_and_transmit():
-    async with websockets.connect("ws://172.24.86.1:8765") as websocket:
-    #async with websockets.connect("ws://192.168.0.133:9090", ping_interval=None) as websocket:
+    async with websockets.connect("ws://localhost:8765") as websocket:
+    #async with websockets.connect("ws://localhost:8765", ping_interval=None) as websocket:
         try:
             audio = pyaudio.PyAudio()
 
