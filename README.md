@@ -21,13 +21,11 @@
 </ul>
 
 <h2>Get Started Today</h2>
-<p>Ready to experience the power of Whisper-Suite? Get started by installing the requirements from requirements.txt with the following comman:</p>
+<p>Ready to experience the power of Whisper-Suite? Get started by installing the requirements from requirements.txt with the following command:</p>
 
-<pre>
-    <code>
-        pip install -r requirements.txt
-    </code>
-</pre>
+```
+pip install -r requirements.txt
+```
 
  Welcome to the future of speech transcription. Welcome to Whisper-Suite!
 
